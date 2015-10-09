@@ -9,6 +9,9 @@ Categories:
     - ops
     - mongodb
     - replication
+tags: [ "replicas", "scaling", "ops" ]
+slug: "CanReplicasHelpScaling"
+
 ---
 
 ### Question:
