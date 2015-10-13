@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title> </title>
+    <link>http://localhost:1313/post.html</link>
+    <language>en-us</language>
+    <author>Asya Kamsky</author>
+    <rights>(C) 2014</rights>
+    <updated>2014-01-02 00:00:00 &#43;0000 UTC</updated>
+
+    
+      
+        <item>
+          <title>Introducing Lanyon</title>
+          <link>http://localhost:1313/2014/01/02/introducing-lanyon/</link>
+          <pubDate>Thu, 02 Jan 2014 00:00:00 UTC</pubDate>
+          <author>Asya Kamsky</author>
+          <guid>http://localhost:1313/2014/01/02/introducing-lanyon/</guid>
+          <description>
+
+&lt;p&gt;Lanyon is an unassuming &lt;a href=&#34;http://jekyllrb.com&#34;&gt;Jekyll&lt;/a&gt; theme that places content first by tucking away navigation in a hidden drawer. It&amp;rsquo;s based on &lt;a href=&#34;http://getpoole.com&#34;&gt;Poole&lt;/a&gt;, the Jekyll butler.&lt;/p&gt;
+
+&lt;h3 id=&#34;built-on-poole:3fbbb50789f1ac58c0e5da0cc6426f3f&#34;&gt;Built on Poole&lt;/h3&gt;
+
+&lt;p&gt;Poole is the Jekyll Butler, serving as an upstanding and effective foundation for Jekyll themes by &lt;a href=&#34;https://twitter.com/mdo&#34;&gt;@mdo&lt;/a&gt;. Poole, and every theme built on it (like Lanyon here) includes the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Complete Jekyll setup included (layouts, config, &lt;a href=&#34;http://localhost:1313/404&#34;&gt;404&lt;/a&gt;, &lt;a href=&#34;http://localhost:1313/index.xml&#34;&gt;RSS feed&lt;/a&gt;, posts, and &lt;a href=&#34;http://localhost:1313/about&#34;&gt;example page&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;Mobile friendly design and development&lt;/li&gt;
+&lt;li&gt;Easily scalable text and component sizing with &lt;code&gt;rem&lt;/code&gt; units in the CSS&lt;/li&gt;
+&lt;li&gt;Support for a wide gamut of HTML elements&lt;/li&gt;
+&lt;li&gt;Related posts (time-based, because Jekyll) below each post&lt;/li&gt;
+&lt;li&gt;Syntax highlighting, courtesy Pygments (the Python-based code snippet highlighter)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;lanyon-features:3fbbb50789f1ac58c0e5da0cc6426f3f&#34;&gt;Lanyon features&lt;/h3&gt;
+
+&lt;p&gt;In addition to the features of Poole, Lanyon adds the following:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Toggleable sliding sidebar (built with only CSS) via &lt;strong&gt;☰&lt;/strong&gt; link in top corner&lt;/li&gt;
+&lt;li&gt;Sidebar includes support for textual modules and a dynamically generated navigation with active link support&lt;/li&gt;
+&lt;li&gt;Two orientations for content and sidebar, default (left sidebar) and &lt;a href=&#34;https://github.com/poole/lanyon#reverse-layout&#34;&gt;reverse&lt;/a&gt; (right sidebar), available via &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/poole/lanyon#themes&#34;&gt;Eight optional color schemes&lt;/a&gt;, available via &lt;code&gt;&amp;lt;body&amp;gt;&lt;/code&gt; classes&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/poole/lanyon#readme&#34;&gt;Head to the readme&lt;/a&gt; to learn more.&lt;/p&gt;
+
+&lt;h3 id=&#34;browser-support:3fbbb50789f1ac58c0e5da0cc6426f3f&#34;&gt;Browser support&lt;/h3&gt;
+
+&lt;p&gt;Lanyon is by preference a forward-thinking project. In addition to the latest versions of Chrome, Safari (mobile and desktop), and Firefox, it is only compatible with Internet Explorer 9 and above.&lt;/p&gt;
+
+&lt;h3 id=&#34;download:3fbbb50789f1ac58c0e5da0cc6426f3f&#34;&gt;Download&lt;/h3&gt;
+
+&lt;p&gt;Lanyon is developed on and hosted with GitHub. Head to the &lt;a href=&#34;https://github.com/poole/lanyon&#34;&gt;GitHub repository&lt;/a&gt; for downloads, bug reports, and features requests.&lt;/p&gt;
+
+&lt;p&gt;Thanks!&lt;/p&gt;
+</description>
+        </item>
+      
+    
+      
+        <item>
+          <title>Example content</title>
+          <link>http://localhost:1313/2014/01/01/example-content/</link>
+          <pubDate>Wed, 01 Jan 2014 00:00:00 UTC</pubDate>
+          <author>Asya Kamsky</author>
+          <guid>http://localhost:1313/2014/01/01/example-content/</guid>
+          <description>
+
+&lt;div class=&#34;message&#34;&gt;
+  Howdy! This is an example blog post that shows several types of HTML content supported in this theme.
+&lt;/div&gt;
+
+&lt;p&gt;Cum sociis natoque penatibus et magnis &lt;a href=&#34;#&#34;&gt;dis parturient montes&lt;/a&gt;, nascetur ridiculus mus. &lt;em&gt;Aenean eu leo quam.&lt;/em&gt; Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Curabitur blandit tempus porttitor. Nullam quis risus eget urna mollis ornare vel eu leo. Nullam id dolor id nibh ultricies vehicula ut id elit.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Etiam porta &lt;strong&gt;sem malesuada magna&lt;/strong&gt; mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.&lt;/p&gt;
+
+&lt;h2 id=&#34;inline-html-elements:359d948725c4841afd7b76bfdf6a18a3&#34;&gt;Inline HTML elements&lt;/h2&gt;
+
+&lt;p&gt;HTML defines a long list of available inline tags, a complete list of which can be found on the &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTML/Element&#34;&gt;Mozilla Developer Network&lt;/a&gt;.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;To bold text&lt;/strong&gt;, use &lt;code&gt;&amp;lt;strong&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;To italicize text&lt;/em&gt;, use &lt;code&gt;&amp;lt;em&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Abbreviations, like &lt;abbr title=&#34;HyperText Markup Langage&#34;&gt;HTML&lt;/abbr&gt; should use &lt;code&gt;&amp;lt;abbr&amp;gt;&lt;/code&gt;, with an optional &lt;code&gt;title&lt;/code&gt; attribute for the full phrase.&lt;/li&gt;
+&lt;li&gt;Citations, like &lt;cite&gt;&amp;mdash; Mark otto&lt;/cite&gt;, should use &lt;code&gt;&amp;lt;cite&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;del&gt;Deleted&lt;/del&gt; text should use &lt;code&gt;&amp;lt;del&amp;gt;&lt;/code&gt; and &lt;ins&gt;inserted&lt;/ins&gt; text should use &lt;code&gt;&amp;lt;ins&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Superscript &lt;sup&gt;text&lt;/sup&gt; uses &lt;code&gt;&amp;lt;sup&amp;gt;&lt;/code&gt; and subscript &lt;sub&gt;text&lt;/sub&gt; uses &lt;code&gt;&amp;lt;sub&amp;gt;&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Most of these elements are styled by browsers with few modifications on our part.&lt;/p&gt;
+
+&lt;h2 id=&#34;heading:359d948725c4841afd7b76bfdf6a18a3&#34;&gt;Heading&lt;/h2&gt;
+
+&lt;p&gt;Vivamus sagittis lacus vel augue rutrum faucibus dolor auctor. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.&lt;/p&gt;
+
+&lt;h3 id=&#34;code:359d948725c4841afd7b76bfdf6a18a3&#34;&gt;Code&lt;/h3&gt;
+
+&lt;p&gt;Cum sociis natoque penatibus et magnis dis &lt;code&gt;code element&lt;/code&gt; montes, nascetur ridiculus mus.&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;// Example can be run directly in your JavaScript console&amp;lt;/p&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;// Create a function that takes two arguments and returns the sum of those arguments&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;adder&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Function(&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;“&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;”&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;“&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;”&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;“&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;”&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;/p&amp;gt;&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;// Call the function&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;adder&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;// &amp;gt; 8&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/p&gt;
+
+&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.&lt;/p&gt;
+
+&lt;h3 id=&#34;lists:359d948725c4841afd7b76bfdf6a18a3&#34;&gt;Lists&lt;/h3&gt;
+
+&lt;p&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Praesent commodo cursus magna, vel scelerisque nisl consectetur et.&lt;/li&gt;
+&lt;li&gt;Donec id elit non mi porta gravida at eget metus.&lt;/li&gt;
+&lt;li&gt;Nulla vitae elit libero, a pharetra augue.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Vestibulum id ligula porta felis euismod semper.&lt;/li&gt;
+&lt;li&gt;Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.&lt;/li&gt;
+&lt;li&gt;Maecenas sed diam eget risus varius blandit sit amet non magna.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.&lt;/p&gt;
+
+&lt;dl&gt;
+  &lt;dt&gt;HyperText Markup Language (HTML)&lt;/dt&gt;
+  &lt;dd&gt;The language used to describe and define the content of a Web page&lt;/dd&gt;
+
+  &lt;dt&gt;Cascading Style Sheets (CSS)&lt;/dt&gt;
+  &lt;dd&gt;Used to describe the appearance of Web content&lt;/dd&gt;
+
+  &lt;dt&gt;JavaScript (JS)&lt;/dt&gt;
+  &lt;dd&gt;The programming language used to build advanced Web sites and applications&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
+
+&lt;h3 id=&#34;tables:359d948725c4841afd7b76bfdf6a18a3&#34;&gt;Tables&lt;/h3&gt;
+
+&lt;p&gt;Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Upvotes&lt;/th&gt;
+      &lt;th&gt;Downvotes&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tfoot&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Totals&lt;/td&gt;
+      &lt;td&gt;21&lt;/td&gt;
+      &lt;td&gt;23&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tfoot&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Alice&lt;/td&gt;
+      &lt;td&gt;10&lt;/td&gt;
+      &lt;td&gt;11&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Bob&lt;/td&gt;
+      &lt;td&gt;4&lt;/td&gt;
+      &lt;td&gt;3&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Charlie&lt;/td&gt;
+      &lt;td&gt;7&lt;/td&gt;
+      &lt;td&gt;9&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Nullam quis risus eget urna mollis ornare vel eu leo.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Want to see something else added? &lt;a href=&#34;https://github.com/poole/poole/issues/new&#34;&gt;Open an issue.&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+      
+    
+      
+        <item>
+          <title>What&#39;s Jekyll?</title>
+          <link>http://localhost:1313/2013/12/31/whats-jekyll/</link>
+          <pubDate>Tue, 31 Dec 2013 00:00:00 UTC</pubDate>
+          <author>Asya Kamsky</author>
+          <guid>http://localhost:1313/2013/12/31/whats-jekyll/</guid>
+          <description>&lt;p&gt;&lt;a href=&#34;http://jekyllrb.com&#34;&gt;Jekyll&lt;/a&gt; is a static site generator, an open-source tool for creating simple yet powerful websites of all shapes and sizes. From &lt;a href=&#34;https://github.com/mojombo/jekyll/blob/master/README.markdown&#34;&gt;the project&amp;rsquo;s readme&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Jekyll is a simple, blog aware, static site generator. It takes a template directory [&amp;hellip;] and spits out a complete, static website suitable for serving with Apache or your favorite web server. This is also the engine behind GitHub Pages, which you can use to host your project’s page or blog right here from GitHub.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It&amp;rsquo;s an immensely useful tool and one we encourage you to use here with Hyde.&lt;/p&gt;
+
+&lt;p&gt;Find out more by &lt;a href=&#34;https://github.com/mojombo/jekyll&#34;&gt;visiting the project on GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+        </item>
+      
+    
+      
+        <item>
+          <title></title>
+          <link>http://localhost:1313/1/01/01/</link>
+          <pubDate>Mon, 01 Jan 0001 00:00:00 UTC</pubDate>
+          <author>Asya Kamsky</author>
+          <guid>http://localhost:1313/1/01/01/</guid>
+          <description>
+
+&lt;h3 id=&#34;question:d15f8c1ea7d4b31deafbbed0f16c3829&#34;&gt;Question:&lt;/h3&gt;
+
+&lt;p&gt;Do replica sets help with read scaling?  If there are more servers to service all my read requests, why wouldn&amp;rsquo;t they be able to service more read requests, or service the same number of read requests faster?&lt;/p&gt;
+
+&lt;h3 id=&#34;answer:d15f8c1ea7d4b31deafbbed0f16c3829&#34;&gt;Answer:&lt;/h3&gt;
+
+&lt;h5 id=&#34;replica-sets:d15f8c1ea7d4b31deafbbed0f16c3829&#34;&gt;Replica Sets.&lt;/h5&gt;
+
+&lt;p&gt;Replica sets are an awesome feature of MongoDB.  They give you &amp;ldquo;High Availability&amp;rdquo; - meaning that when the primary node becomes unavailable (crashes, gets unplugged from the network, gets DOS&amp;rsquo;ed by another process on the same box) the rest of the nodes will &lt;strong&gt;elect&lt;/strong&gt; a new primary and the driver (which your application uses to communicate with MongoDB) will automatically track all nodes and when the primary role changes from one server to another, it will automatically detect to send requests there.&lt;/p&gt;
+
+&lt;h5 id=&#34;single-master:d15f8c1ea7d4b31deafbbed0f16c3829&#34;&gt;Single Master:&lt;/h5&gt;
+
+&lt;p&gt;MongoDB Replica Sets are a &amp;ldquo;single master&amp;rdquo; architecture.  That means that all writes must go to the one primary and from there they are asynchronously replicated to all secondaries.   Your reads also go to the primary, meaning you can always read your own writes.  Your read requests would &lt;em&gt;never&lt;/em&gt; be sent to a secondary unless your application &lt;em&gt;explicitly&lt;/em&gt; requests that the read go somewhere other than the primary, so you would never be getting &amp;ldquo;stale&amp;rdquo; data without being aware of it.&lt;/p&gt;
+
+&lt;h5 id=&#34;the-questions-we-have-are:d15f8c1ea7d4b31deafbbed0f16c3829&#34;&gt;The questions we have are:&lt;/h5&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Should you use secondary reads?&lt;br /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Will they help you handle more reads?&lt;/li&gt;
+&lt;li&gt;Will they help you handle same reads faster?&lt;/li&gt;
+&lt;li&gt;Are there downsides?&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;When should you use secondary reads?&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Because secondary reads create complexity for your application which now needs to handle (possibly very) stale data and situations where just-made-write is not available for read, I would caution users to be sure that they are getting some benefits from secondary reads.  I’m going to look at possible benefits and discuss whether they are likely to be realized using secondary replica nodes or not.&lt;/p&gt;
+
+&lt;h5 id=&#34;will-more-servers-help-you-handle-same-reads-faster:d15f8c1ea7d4b31deafbbed0f16c3829&#34;&gt;Will more servers help you handle same reads faster?&lt;/h5&gt;
+
+&lt;p&gt;I think the answer for simple operational reads is obviously no.  If a read takes 10μs then it&amp;rsquo;s not likely to take 1/5th of that just because there are five servers - this is a single unit of work.  That&amp;rsquo;s the actual duration of the read.&lt;/p&gt;
+
+&lt;h5 id=&#34;will-more-servers-help-you-handle-more-reads:d15f8c1ea7d4b31deafbbed0f16c3829&#34;&gt;Will more servers help you handle more reads?&lt;/h5&gt;
+
+&lt;p&gt;Intuitively, it feels like the answer should be “yes” - but that would only be the case if the reads somehow interfered with each other on the single node.  If they are reading the same “hot” data then they can be working in parallel up to the limit of your CPUs.   So in real life, the answer to whether all your replica nodes together can handle more reads than just your primary is maybe yes and maybe no. Usually no. It all depends on why your single primary cannot handle all of the reads by itself.&lt;/p&gt;
+
+&lt;p&gt;My assumption is if your primary can handle all of the reads by itself, then you would have very little reason to even consider reading stale data from a secondary - you gain very little and lose strong consistency of data. There can be some scenarios where reading from a secondary will reduce the latency to the server (not the actual duration of the read) but those are rather specific use cases I’ll point out at the end of the article.&lt;/p&gt;
+
+&lt;p&gt;Okay, so that leaves us with the sad case of a primary that is not able to handle all the reads all by itself. Now we must ask ourselves why it cannot handle all the reads. Depending on the reason why, we can try to predict whether directing some of those reads to secondaries will help the overall situation.&lt;/p&gt;
+
+&lt;p&gt;If reads are not handled by primary alone because they are too slow then it doesn&amp;rsquo;t matter why they are too slow - they will be too slow on the secondaries as well. You can try to tune your queries, but it’s more likely that the queries are slow because of underlying root causes&amp;hellip; let&amp;rsquo;s look at those&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Indexes don&amp;rsquo;t fit in RAM - oops! we know that every replica set member has identical data so if indexes don&amp;rsquo;t fit in RAM on the primary, they don&amp;rsquo;t fit in RAM on the secondary either!&lt;/li&gt;
+&lt;li&gt;Too much data being scanned (usually because working set doesn&amp;rsquo;t fit in RAM) and the disks are slow - pretty much the same as (1) since the secondaries will have the same limitation&lt;/li&gt;
+&lt;li&gt;The large number of writes are starving out the reads (i.e. readers have to wait for writers and if there are too many writers when writers yield other writers go and reads can get starved in extreme cases).  But the writes that happen on the primary also have to happen on the secondary!  So moving the readers to the secondary will just starve them on the secondary instead of starving them on the primary.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;I know what some of you may be thinking on (3) - you&amp;rsquo;re thinking that all the reads may be starving on the primary but if you split the reads between the primary and the secondary maybe they won&amp;rsquo;t get starved?&lt;/p&gt;
+
+&lt;p&gt;Maybe.  But you know what you did when you achieved your read
+requirements by splitting the load between the primary and the
+secondary?   &lt;strong&gt;You gave up HA&lt;/strong&gt;.  Remember, if you can only service the incoming load when all of your nodes are up, then you don&amp;rsquo;t have &lt;em&gt;any&lt;/em&gt; high availability, as losing a node will basically start starving out some of the incoming requests which means you won&amp;rsquo;t meet your SLAs.&lt;/p&gt;
+
+&lt;p&gt;Since replication is for High Availability, it means some of its capacity simply must not be tied up so that it can be “standing by” in case of a failover. If you want to use some extra capacity that you perceive is otherwise going &amp;ldquo;wasted&amp;rdquo; to service your every day load, maybe you can do it, as long as you have a very clear understanding that you may have given up some of that High Availability, and I would definitely recommend against that.&lt;/p&gt;
+
+&lt;p&gt;One thing I invite you to try is to set up a simple test &lt;code&gt;mongod&lt;/code&gt; instance where you take some collection with some indexes that all fit in RAM and start up a bunch of multi-threaded clients (from other machines otherwise you&amp;rsquo;ll be testing something else) and have those clients hammer the server with read requests. See how many clients you have to add and how many requests you have to throw at &lt;code&gt;mongod&lt;/code&gt; before you can&amp;rsquo;t add any more clients requesting more reads without performance of existing reads suffering.  Trying it out will give you an idea of the maximum read throughput that a single node can handle.&lt;/p&gt;
+
+&lt;p&gt;Of course, this is not the complete story.  It turns out that there are some excellent use cases for secondary reads, some more common, some less so.&lt;/p&gt;
+
+&lt;h5 id=&#34;the-types-of-reads-to-route-to-secondaries:d15f8c1ea7d4b31deafbbed0f16c3829&#34;&gt;The types of reads to route to secondaries&lt;/h5&gt;
+
+&lt;p&gt;There are two types of use cases for reads that you do want to route to secondaries. One I already alluded to: if you have a read heavy system and reads are not super-sensitive to staleness of data but they &lt;em&gt;are&lt;/em&gt; super sensitive to overall latency of satisfying a read request, you can realize a big win reading from the nearest member of the replica set rather than the primary.  If your SLA says reads must return in under 100ms but your one way network latency to the primary is 75ms how can you satisfy the SLA from various parts of the world? That&amp;rsquo;s a use case for distributing data all over the world via secondaries in your replica set!  If you have nodes in data centers on different continents (and the PRIMARY near your write source) you can specify read preference of &amp;ldquo;nearest&amp;rdquo; and make sure that each read request goes to the node that has the lowest network latency from the requester.&lt;/p&gt;
+
+&lt;p&gt;Note that this is &lt;em&gt;not&lt;/em&gt; technically &amp;ldquo;scaling&amp;rdquo; your read capacity, this is basically taking advantage of replication already having pulled the data over the long network connection and reducing your network latency to the DB.  Don’t forget that if you are relying on reading from “nearest” to meet your SLAs for total round trip to get the data, you have to consider whether your SLAs will still be met if a secondary in a particular region fails.&lt;/p&gt;
+
+&lt;p&gt;The second use case is about reads that are not &amp;ldquo;typical&amp;rdquo; of your &amp;ldquo;normal&amp;rdquo; operational load.  Now, “typical” and “normal” is going to be different for different use cases, but some common examples are things like nightly ETL jobs, ad hoc &amp;ldquo;historical&amp;rdquo; or analytical queries, regular backup jobs, or a Hadoop job.  It could also be something else.  The reason you want to isolate this “atypical” load to the secondary is because it will &amp;ldquo;mess up&amp;rdquo; your memory-resident data set on the primary!&lt;/p&gt;
+
+&lt;p&gt;Imagine you worked very hard to optimize your queries so that indexes are always in RAM and there is just enough RAM left over for the &amp;ldquo;hot&amp;rdquo; subset of data to give you excellent performance. You then start running an analytics query and it&amp;rsquo;s pulling &lt;em&gt;all&lt;/em&gt; the data from mongo which means your entire data set, hot and cold, now gets pulled into resident memory. Guess what just got evicted to make room for it? Yep, your &amp;ldquo;normal&amp;rdquo; data set, or at least a very large portion of it.†&lt;/p&gt;
+
+&lt;p&gt;To keep &amp;ldquo;atypical&amp;rdquo; jobs from interfering with your &amp;ldquo;typical&amp;rdquo; work load, configure the atypical ones to use read preference Secondary. Note that Secondary is different from SecondaryPreferred as the latter will go to the Primary if there is no available Secondary but the former will return an error if there is no Secondary to read from.  Since these jobs are usually not urgent, you’d rather have them wait and retry later than interfere with operational responsiveness of your app anyway.  You can even use &lt;a href=&#34;http://docs.mongodb.org/manual/tutorial/configure-replica-set-tag-sets/&#34;&gt;&amp;ldquo;tags&amp;rdquo;&lt;/a&gt; to isolate different jobs to specific nodes even further.&lt;/p&gt;
+
+&lt;p&gt;#####Bottom line#####&lt;/p&gt;
+
+&lt;p&gt;Make your primary do the work that the application relies on every second.  Make sure that &lt;em&gt;at least&lt;/em&gt; one secondary is idle and ready to take over for the primary in case of failure.  Use additional secondaries (&lt;em&gt;not&lt;/em&gt; the hot standby one!) for all other needs whether it’s backups, analytical reports, ad hoc queries, ETL, etc.  This way, you know that you can handle the application requirements after a failover just as well as before.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;†  By the way, this is exactly what happens when you have a query that doesn&amp;rsquo;t have a good index to use - it does a full collection scan - more on that in a future &amp;ldquo;answer&amp;rdquo;.&lt;/p&gt;
+</description>
+        </item>
+      
+    
+
+  </channel>
+</rss>

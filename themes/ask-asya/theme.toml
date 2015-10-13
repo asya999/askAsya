@@ -1,0 +1,27 @@
+# theme.toml template for a Hugo theme
+# See https://github.com/spf13/hugoThemes#themetoml for an example
+
+name = "ask-asya"
+license = "MIT"
+licenselink = "https://github.com/asya999/askAsya/blob/master/LICENSE.md"
+description = "Ask Asya Theme"
+homepage = "http://askAsya.com/"
+tags = ["tags", "categories"]
+features = ["mongodb", "nosql"]
+min_version = 0.14
+
+[author]
+  name = "Asya Kamsky"
+  homepage = "http://askasya.com"
+
+[params]
+  title = "Ask Asya"
+  tagline = "Answers to your burning questions about MongoDB"
+  GitHubUser = asya999
+  DateForm = "Jan 2 2006"
+
+# If porting an existing theme
+[original]
+  name = "lanyon"
+  homepage = ""
+  repo = "https://github.com/tummychow/lanyon-hugo"
