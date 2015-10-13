@@ -3,7 +3,7 @@ author = "Asya Kamsky"
 canonifyurls = true
 paginate = 3
 theme = "ask-asya"
-baseurl = "http://askasya.com/"
+baseurl = "http://asya999.github.io/"
 languageCode = "en-us"
 MetaDataFormat = "toml"
 
