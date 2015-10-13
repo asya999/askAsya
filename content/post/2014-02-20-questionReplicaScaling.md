@@ -4,7 +4,7 @@ Description = ""
 Tags = []
 date = "2014-02-20T11:03:42-07:00"
 title = "Can I use more replica nodes to scale?"
-slug = "canreplicashelpscaling"
+slug = "CanReplicasHelpScaling"
 +++
 
 ### Question:
