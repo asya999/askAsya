@@ -6,13 +6,13 @@ title = "Can I use more replica nodes to scale?"
 slug = "canreplicashelpscaling"
 +++
 
-### Question:
+### Question: ###
 
 Do replica sets help with read scaling?  If there are more servers to service all my read requests, why wouldn't they be able to service more read requests, or service the same number of read requests faster?
 
-### Answer:
+### Answer: ###
 
-##### Replica Sets.
+##### Replica Sets.  ###
 Replica sets are an awesome feature of MongoDB.  They give you "High Availability" - meaning that when the primary node becomes unavailable (crashes, gets unplugged from the network, gets DOS'ed by another process on the same box) the rest of the nodes will **elect** a new primary and the driver (which your application uses to communicate with MongoDB) will automatically track all nodes and when the primary role changes from one server to another, it will automatically detect to send requests there.
 ##### Single Master:
 MongoDB Replica Sets are a "single master" architecture.  That means that all writes must go to the one primary and from there they are asynchronously replicated to all secondaries.   Your reads also go to the primary, meaning you can always read your own writes.  Your read requests would _never_ be sent to a secondary unless your application *explicitly* requests that the read go somewhere other than the primary, so you would never be getting "stale" data without being aware of it.
