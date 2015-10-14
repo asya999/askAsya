@@ -1,7 +1,8 @@
 +++
+Categories = ["MongoDB"]
 Title= "How to Balance Collections Across Your Sharded Cluster"
 Date= "2014-04-29"
-Slug= "TaggedCollectionBalancing"
+Slug= "taggedcollectionbalancing"
 Tags= ["sharding","tags","balancing","mongodb"]
 +++
 

@@ -1,10 +1,9 @@
 +++
-Categories = []
-Description = ""
-Tags = []
-date = "2014-02-20T11:03:42-07:00"
+Categories = ["MongoDB"]
+Tags = ["replication","performance","ops"]
+date = "2014-02-20"
 title = "Can I use more replica nodes to scale?"
-slug = "CanReplicasHelpScaling"
+slug = "canreplicashelpscaling"
 +++
 
 ### Question:
