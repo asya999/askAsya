@@ -26,14 +26,14 @@ We looked at the trade-offs and decided that the important factors were our abil
 ##### Where we left off:
 Here's a table that shows for each schema choice that we considered how well we can handle the reads, writes and if an update has to make more than one write, how easy it is to recover or to be in a relatively "safe" state:
 
-|Schema | Fetch 1 | Fetch Many || Update | Recover if fail|
------------- | ------------- | ------------|-|---------------|-----------------|-------------
-|1) New doc for each | Easy,Fast  | Not easy,Slow | | Medium | N/A |
-|1a) New doc with "current" | Easy,Fast  | Easy,Fast | | Medium | Hard |
-|2) Embedded in single doc | Easy,Fastest  | Easy,Fastest | | Medium | N/A |
-|3) Sep Collection for prev. |  Easy,Fastest  | Easy,Fastest  | | Medium |  Medium Hard |
-|4) Deltas only in new doc | Hard,Slow | Hard,Slow | | Medium | N/A |
-|?) TBD |  Easy,Fastest  | Easy,Fastest  | | Easy,Fastest |  N/A |
+             Schema         | Fetch 1       | Fetch Many  | | Update        | Recover if fail 
+----------------------------|---------------|-------------|-|---------------|-----------------
+1) New doc for each         | Easy,Fast     | Not easy,Slow | | Medium | N/A 
+1a) New doc with "current"  | Easy,Fast     | Easy,Fast | | Medium | Hard 
+2) Embedded in single doc   | Easy,Fastest  | Easy,Fastest | | Medium | N/A 
+3) Sep Collection for prev. |  Easy,Fastest | Easy,Fastest  | | Medium |  Medium Hard 
+4) Deltas only in new doc   | Hard,Slow     | Hard,Slow | | Medium | N/A 
+?) TBD                      |  Easy,Fastest | Easy,Fastest  | | Easy,Fastest |  N/A 
 
 "N/A" for recovery means there is no inconsistent state possible - if we only have to make one write to create/add a new version, we are safe from any inconsistency.  So "N/A" is the "easiest" value there.  
 
@@ -172,21 +172,23 @@ Code for setting up the cursor using [appropriate options](http://docs.mongodb.o
 <pre class="prettyprint lang-js">
 /* set up the cursor with appropriate filter and options */
 var cursor=db.getSiblingDB("local").getCollection("oplog.rs"
-       ).find({"ns":namespace,"ts":{"$gte":prevTS}}).addOption(DBQuery.Option.oplogReplay
-       ).addOption(DBQuery.Option.awaitData).addOption(DBQuery.Option.tailable
-       ).addOption(DBQuery.Option.noTimeout);
+    ).find({"ns":namespace,"ts":{"$gte":prevTS}}
+    ).addOption(DBQuery.Option.oplogReplay
+    ).addOption(DBQuery.Option.awaitData
+    ).addOption(DBQuery.Option.tailable
+    ).addOption(DBQuery.Option.noTimeout);
 </pre>
 
 Code running on the right-hand-side (blue screen) which loops and inserts or updates the watched collection every second:
 
 <pre class="prettyprint lang-js">
 for ( docId = 270; docId < 290; docId++ ) {
-        print("waiting one second...");
-        sleep(1000);
-        printjson(db.docs.update(
-                      { "_id": docId },
-                      { "$inc" : {"version":1}, "$set":{"attr7":"xxx"+docId } },
-                      { "upsert" : true }));
+    print("waiting one second...");
+    sleep(1000);
+    printjson(db.docs.update(
+          { "_id": docId },
+          { "$inc" : {"version":1}, "$set":{"attr7":"xxx"+docId } },
+          { "upsert" : true }));
 }
 </pre>
 
@@ -195,36 +197,39 @@ Code that fetches documents from the tailable cursor and applies appropriate cha
 <pre class="prettyprint lang-js">
 while (cursor.hasNext()) {
        
-       var doc=cursor.next();
-       var operation = (doc.op=="u") ? "update" : "insert";
-       print("TS: " + doc.ts + " for " + operation + " at " + new Date());
-       
-       if ( doc.op == "i") {  /* originally an upsert */
-           result = db.getCollection(coll).save(doc.o);
-           if (result.nUpserted==1) print("Inserted doc _id " + doc.o._id);
-           else {
-              if (result.nMatched==1 ) {
-                 if ( result.nModified==0) print("Doc " + doc.o._id + " exists.");
-                 else  print("Doc " + doc.o._id + " may have been newer");
-              } else throw "Insert error " + tojson(doc)  + " " + tojson(result);
+    var doc=cursor.next();
+    var operation = (doc.op=="u") ? "update" : "insert";
+    print("TS: " + doc.ts + " for " + operation + " at " + new Date());
+    
+    if ( doc.op == "i") {  /* originally an upsert */
+        result = db.getCollection(coll).save(doc.o);
+        if (result.nUpserted==1) print("Inserted doc _id " + doc.o._id);
+        else {
+           if (result.nMatched==1 ) {
+             if ( result.nModified==0) {
+                 print("Doc " + doc.o._id + " exists.");
+             } else  print("Doc " + doc.o._id + " may have been newer");
+           } else {
+             throw "Insert error " + tojson(doc)  + " " + tojson(result);
            }
-       } else if ( doc.op == "u" ) { /* originally an update */
-           result = db.getCollection(coll).update(doc.o2, doc.o);
-           if (result.nModified ==1) print("Updated doc _id " + doc.o2._id);
-           else if (result.nMatched==1 && result.nModified==0) print(
-                         "Already updated doc _id " + doc.o2._id);
-           else  throw "No update for " + tojson(doc) + " " + tojson(result);
-       } else if (doc.op != "c") throw "Unexpected op! " + tojson(doc);
-       
-       res=db.getCollection("lastApplied").update(
-                     { "_id" : coll },
-                     { "$set" : { "ts" : doc.ts } }
-       );
+        }
+    } else if ( doc.op == "u" ) { /* originally an update */
+        result = db.getCollection(coll).update(doc.o2, doc.o);
+        if (result.nModified ==1) print("Updated doc _id " + doc.o2._id);
+        else if (result.nMatched==1 && result.nModified==0) print(
+                   "Already updated doc _id " + doc.o2._id);
+        else  throw "No update for " + tojson(doc) + " " + tojson(result);
+    } else if (doc.op != "c") throw "Unexpected op! " + tojson(doc);
+    
+    res=db.getCollection("lastApplied").update(
+            { "_id" : coll },
+            { "$set" : { "ts" : doc.ts } }
+    );
 
-       if (res.nModified==1) print("Updated lastApplied to " + doc.ts);
-       else print("Repeated last applied op");
+    if (res.nModified==1) print("Updated lastApplied to " + doc.ts);
+    else print("Repeated last applied op");
 
-       prevTS=doc.ts; /* save in case we need to refetch from the oplog */
+    prevTS=doc.ts; /* save in case we need to refetch from the oplog */
 }
 </pre>
 Of course this code does minimal error checking and it's not set up to automatically restart if it loses connection to the primary, or the primary changes in the replica set.  This is because here we are reading from a local oplog when in real life you may be fetching data from another server or cluster entirely.  Even so, about 15 lines of code there are for error checking and information printing, so the actual "work" we do is quite simple.  
@@ -254,74 +259,76 @@ db.getCollection(coll).ensureIndex(
          { "docId":1, "version": 1 },
          { "unique" : true, "background" : true } );
 if (db.getCollection("lastApplied").count({"_id":coll})==0) {
-     prevTS=db.getSiblingDB("local").oplog.rs.findOne({"ns":namespace}).ts;
-     db.getCollection("lastApplied").update( { "_id" : coll }, 
-        {"$set" : { "ts" : prevTS } }, { "upsert" : true } );
+   prevTS=db.getSiblingDB("local").oplog.rs.findOne({"ns":namespace}).ts;
+   db.getCollection("lastApplied").update( { "_id" : coll }, 
+      {"$set" : { "ts" : prevTS } }, { "upsert" : true } );
 } else {
-     prevTS=db.getCollection("lastApplied").findOne({"_id":coll}).ts;
+   prevTS=db.getCollection("lastApplied").findOne({"_id":coll}).ts;
 }
 </pre>
 The cursor (same as before):
 <pre class="prettyprint lang-js">
 var cursor=db.getSiblingDB("local").getCollection("oplog.rs"
-       ).find({"ns":namespace,"ts":{"$gte":prevTS}}).addOption(DBQuery.Option.oplogReplay
-       ).addOption(DBQuery.Option.awaitData).addOption(DBQuery.Option.tailable
+       ).find({"ns":namespace,"ts":{"$gte":prevTS}}
+       ).addOption(DBQuery.Option.oplogReplay
+       ).addOption(DBQuery.Option.awaitData
+       ).addOption(DBQuery.Option.tailable
        ).addOption(DBQuery.Option.noTimeout);
 </pre>
 The worker loop (slightly adjusted):
 <pre class="prettyprint lang-java">
 while (cursor.hasNext()) {
-       var doc=cursor.next();
-       var operation = (doc.op=="u") ? "update" : "insert";
-       var id = (doc.op=="u") ? doc.o2._id : doc.o._id;
-       var newDoc={ };
-       print("TS: " + doc.ts + " for " + operation + " at " + new Date());
-       if ( doc.op == "i" || 
-               (doc.op == "u" && doc.o.hasOwnProperty("_id")) ) {
-           for (i in doc.o) {
-                   if (i=='_id') newDoc.docId=doc["o"][i];
-                   else newDoc[i]=doc["o"][i];
-           }
-       } else if ( doc.op == "u" ) {
-           /* create new doc out of old document and the sets and unsets */
-           var prevVersion = { "docId" : doc.o2._id, 
-                        "version" : doc.o["$set"]["version"]-1 };
-           var prevDoc = db.getCollection(coll).findOne("prevVersion", {"_id":0});
-           if (prevDoc == null) {
-                        throw "Couldn't find previous version in archive! " + 
-                                     tojson(prevVersion) + tojson(doc);
-           }
-           newDoc = prevDoc;
-           if (doc.o.hasOwnProperty("$set")) {
-               for (i in doc.o["$set"]) {
-                   newDoc[i]=doc.o["$set"][i];
-               }
-           } else if (doc.o.hasOwnProperty("$unset")) { 
-               for (i in doc.o["$unset"]) {
-                   delete(newDoc[i]);
-               }
-           } else throw "Can only handle update with '_id', '$set' or '$unset' ";
-       } else if (doc.op != "c") throw "Unexpected op! " + tojson(doc);
+    var doc=cursor.next();
+    var operation = (doc.op=="u") ? "update" : "insert";
+    var id = (doc.op=="u") ? doc.o2._id : doc.o._id;
+    var newDoc={ };
+    print("TS: " + doc.ts + " for " + operation + " at " + new Date());
+    if ( doc.op == "i" || 
+            (doc.op == "u" && doc.o.hasOwnProperty("_id")) ) {
+        for (i in doc.o) {
+                if (i=='_id') newDoc.docId=doc["o"][i];
+                else newDoc[i]=doc["o"][i];
+        }
+    } else if ( doc.op == "u" ) {
+        /* create new doc out of old document and the sets and unsets */
+        var prevVersion = { "docId" : doc.o2._id, 
+                     "version" : doc.o["$set"]["version"]-1 };
+        var prevDoc = db.getCollection(coll).findOne("prevVersion", {"_id":0});
+        if (prevDoc == null) {
+                     throw "Couldn't find previous version in archive! " + 
+                                  tojson(prevVersion) + tojson(doc);
+        }
+        newDoc = prevDoc;
+        if (doc.o.hasOwnProperty("$set")) {
+            for (i in doc.o["$set"]) {
+                newDoc[i]=doc.o["$set"][i];
+            }
+        } else if (doc.o.hasOwnProperty("$unset")) { 
+            for (i in doc.o["$unset"]) {
+                delete(newDoc[i]);
+            }
+        } else throw "Can only handle update with '_id', '$set' or '$unset' ";
+    } else if (doc.op != "c") throw "Unexpected op! " + tojson(doc);
 
-       var  result = db.getCollection(coll).insert(newDoc);
-       if (result.nInserted==1) {
-             print("Inserted doc " + 
-                      newDoc.docId + " version " + newDoc.version);
-       } else {
-             if (result.getWriteError().code==11000 ) {
-                    print("Doc " + newDoc.docId + " version " + 
-                           newDoc.version + " already exists.");
-             } else throw "Error inserting " + tojson(doc)  + 
-                           " as " + tojson(newDoc)+ "Result " + tojson(result);
-       }
+    var  result = db.getCollection(coll).insert(newDoc);
+    if (result.nInserted==1) {
+       print("Inserted doc " + 
+                newDoc.docId + " version " + newDoc.version);
+    } else {
+       if (result.getWriteError().code==11000 ) {
+           print("Doc " + newDoc.docId + " version " + 
+                  newDoc.version + " already exists.");
+       } else throw "Error inserting " + tojson(doc)  + 
+                  " as " + tojson(newDoc)+ "Result " + tojson(result);
+    }
 
-       var res=db.getCollection("lastApplied").update(
-                   { "_id" : coll },
-                   { "$set" : {ts:doc.ts} },
-                   { "upsert" : true }
-       );
-       var prevTS=doc.ts;
-       print("Set lastApplied to " + doc.ts);
+    var res=db.getCollection("lastApplied").update(
+             { "_id" : coll },
+             { "$set" : {ts:doc.ts} },
+             { "upsert" : true }
+    );
+    var prevTS=doc.ts;
+    print("Set lastApplied to " + doc.ts);
 }
 </pre>
 

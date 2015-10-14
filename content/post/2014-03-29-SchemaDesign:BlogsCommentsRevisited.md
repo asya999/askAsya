@@ -1,8 +1,8 @@
 +++
-Categories = ["MongoDB"]
-Tags = ["schema","modeling",embed","arrays"]
+categories = ["MongoDB"]
+tags = ["schema","modeling","embed","arrays"]
 date = "2014-03-29"
-title = "Schema Design: Blog Posts and Comments revisited"
+title = "Schema Design - Blog Posts and Comments revisited"
 slug = "embedorlink"
 +++
 
