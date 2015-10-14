@@ -1,6 +1,6 @@
 +++
-Categories = ["MongoDB"]
-Tags = ["schema","modeling","indexes","arrays"]
+categories = ["MongoDB"]
+tags = ["schema","modeling","indexes","arrays"]
 date = "2014-04-15"
 title = "How to Model Dynamic Attributes"
 slug = "dynamicattributes"

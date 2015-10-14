@@ -1,6 +1,6 @@
 +++
-Categories = ["MongoDB"]
-Tags = ["replication","performance","ops"]
+categories = ["MongoDB"]
+tags = ["replication","performance","ops"]
 date = "2014-02-20"
 title = "Can I use more replica nodes to scale?"
 slug = "canreplicashelpscaling"

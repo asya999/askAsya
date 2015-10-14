@@ -7,14 +7,17 @@ Tags= ["schema","modeling","indexes","versioning"]
 +++
 
 ### Question: ###
+
 Recall [our previous discussion](http://askasya.com/post/trackversions) about ways to  recreate older version of a document that ever existed in a particular collection.   
     
 The goal was to preserve every state for each object, but to respond to queries with the "current" or "latest" version.   We had a requirement to be able to have an infrequent audit to review all or some previous versions of the document.
 
 ### Answer: ###
+
 I had suggested at the time that there was a different way to achieve this that I liked better than the discussed methods and I'm going to describe it now.
 
 #### Previous Discussion Summary: ####
+
 Up to this point, we considered keeping versions of the same document within one MongoDB document, in separate documents within the same collection, or by "archiving off" older versions of the document into a separate collection.
 
 We looked at the trade-offs and decided that the important factors were our ability to 
@@ -24,6 +27,7 @@ We looked at the trade-offs and decided that the important factors were our abil
     + including recovering from failure in the middle of a set of operations (if there is more than one)
 
 ##### Where we left off:
+
 Here's a table that shows for each schema choice that we considered how well we can handle the reads, writes and if an update has to make more than one write, how easy it is to recover or to be in a relatively "safe" state:
 
              Schema         | Fetch 1       | Fetch Many  | | Update        | Recover if fail 
@@ -136,7 +140,8 @@ You may think it's not easy, but it turns out that there are lots of [helpers](h
 
 Here is a little demo.  The code and explanations are after the video, so feel free to browse ahead before watching, or you can watch first and read the explanations after.
 
-##### Tailing the oplog to maintain a copy of a collection elsewhere
+##### Tailing the oplog to maintain a copy of a collection elsewhere #####
+
 For our first example, we'll do something simple - we will watch the oplog for changes to a specific collection, and then we will apply those changes to our own copy of the collection - we will call our collection something else.  Our example stores the copy in the same database, but of course, it could be anywhere else, including in a completely different replica set or standalone server.
 
 <pre>
@@ -234,7 +239,8 @@ while (cursor.hasNext()) {
 </pre>
 Of course this code does minimal error checking and it's not set up to automatically restart if it loses connection to the primary, or the primary changes in the replica set.  This is because here we are reading from a local oplog when in real life you may be fetching data from another server or cluster entirely.  Even so, about 15 lines of code there are for error checking and information printing, so the actual "work" we do is quite simple.  
 
-##### Creating a full archive from tailing the oplog
+##### Creating a full archive from tailing the oplog #####
+
 Now that we know how to replay original documents to maintain an indentical "copy" collection, let's see what we have to do differently when we want to insert a new version of the document without losing any of the old versions.
 
 For simplicity, I put the docId in the example collection into the `_id` field, so I will need to structure the full archive collection schema differently, since it cannot have multiple documents with the same `_id`.[^2]  For simplicity, I will let MongoDB generate the `_id` and I will use the combination of docId and version with a unique index on them to prevent duplicate versions.  I could achieve something similar by using the combination of original `_id` (which is the docId) and `version` fields as a compound `_id` field but then I would need to do more complicated transformations on the oplog entry.  I always choose the method that is  simpler.
@@ -335,6 +341,7 @@ while (cursor.hasNext()) {
 It turns out that the loop will be slightly simpler because no matter what comes in, we will always do an insert into the full archive collection.
 
 ##### Test it out!
+
 Let's run this code and then compare for a single docId the operations in the oplog, and what we end up with in the archive collection:
 
 The oplog entries:

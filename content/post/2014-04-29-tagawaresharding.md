@@ -32,6 +32,7 @@ All you have to do for tagging to work is mark some shards with "tags" and speci
 The MongoDB docs have a great tutorial that you always see used as an example for tag aware sharding - your shard key has to include a prefix field that can be used to figure out which geographical region the user is in, and the range of shard key values that starts with certain regions will be associated with shards in that data center.
 
 That's all fine and good, but I'll show you that it doesn't have to be nearly that complex.
+
 #####How you can use tags to designate which shards a sharded collection can use.
 Let's walk through an example.   I have three shards in my test cluster:
 
@@ -109,12 +110,12 @@ tagdb@mongos(2.6.0) > sh.status()
 			{ "_id" : 3074457345618258602 } -->> { "_id" : 6148914691236517204 } on : shard0000
 			{ "_id" : 6148914691236517204 } -->> { "_id" : { "$maxKey" : 1 } } on : shard0001
 			 tag: HI_MEM  { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } }
-{{< highlight js "style=friendly" >}}
+{{< /highlight >}}
 
 ##### How you can use tags to make collection migrate from one shard to another
 What if you have a number of unsharded collections in your sharded database and you don't want for all of them to hang out on the primary shard for this DB?   Well, you might need unique tags for each shard, but then you can do this to move collection one to `shard0001`:
  
-<pre class="prettyprint lang-js">
+{{< highlight js "style=friendly" >}}
 tagdb@mongos(2.6.0) > sh.addShardTag("shard0002","shard2")
 tagdb@mongos(2.6.0) > sh.addTagRange("tagdb.one", {_id:MinKey},{_id:MaxKey},"shard2")
 tagdb@mongos(2.6.0) > sh.shardCollection("tagdb.one",{_id:1})
@@ -127,7 +128,7 @@ tagdb@mongos(2.6.0) > sh.status()
 				shard0002	1
 			{ "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } } on : shard0002
 			 tag: shard2  { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } }
-</pre>
+{{< /highlight >}}
 
 If we peek inside the config database, we should see our tags in the `config.tags` collection, our shard ranges attached to chunks in `config.chunks` and we can find evidence of the chunk moves due to tag policy in the `config.changelog` collection, as well as the `mongos` and `mongod` log files.
 

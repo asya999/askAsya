@@ -1,9 +1,9 @@
 +++
-Title= "What Does FindAndModify Do"
-Date= "2014-05-19"
-Categories = ["MongoDB"]
-Slug= "findandmodify"
-Tags= ["performance","update","findAndModify","schema"]
+title= "What Does FindAndModify Do"
+date= "2014-05-19"
+categories = ["MongoDB"]
+slug= "findandmodify"
+tags= ["performance","update","findAndModify","schema"]
 +++
 
 ### Question:

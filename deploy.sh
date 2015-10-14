@@ -2,11 +2,11 @@
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
-# Add changes to git.
-git add -A
-
 # Build the project.
 hugo --verbose
+
+# Add changes to git.
+git add -A
 
 # Commit changes.
 msg="rebuilding site `date`"
