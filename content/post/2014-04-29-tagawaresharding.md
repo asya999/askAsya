@@ -73,43 +73,43 @@ tagdb@mongos(2.6.0) > sh.shardCollection("tagdb.bigidx", {_id:"hashed"})
 tagdb@mongos(2.6.0) > sh.status()
 --- Sharding Status ---
   sharding version: {
-	"_id" : 1,
-	"version" : 4,
-	"minCompatibleVersion" : 4,
-	"currentVersion" : 5,
-	"clusterId" : ObjectId("535be5d7d5274545e9d01426")
+     "_id" : 1,
+     "version" : 4,
+     "minCompatibleVersion" : 4,
+     "currentVersion" : 5,
+     "clusterId" : ObjectId("535be5d7d5274545e9d01426")
   }
   shards:
-	{  "_id" : "shard0000",  "host" : "localhost:30000",  "tags" : [ "HI_MEM" ] }
-	{  "_id" : "shard0001",  "host" : "localhost:30001",  "tags" : [ "FLASH", "HI_MEM" ] }
-	{  "_id" : "shard0002",  "host" : "localhost:30002",  "tags" : [ "FLASH" ] }
+     {  "_id" : "shard0000",  "host" : "localhost:30000",  "tags" : [ "HI_MEM" ] }
+     {  "_id" : "shard0001",  "host" : "localhost:30001",  "tags" : [ "FLASH", "HI_MEM" ] }
+     {  "_id" : "shard0002",  "host" : "localhost:30002",  "tags" : [ "FLASH" ] }
   databases:
-	{  "_id" : "admin",  "partitioned" : false,  "primary" : "config" }
-	{  "_id" : "tagdb",  "partitioned" : true,  "primary" : "shard0001" }
-		tagdb.bigdata
-			shard key: { "_id" : "hashed" }
-			chunks:
-				shard0001	3
-				shard0002	3
-			{ "_id" : { "$minKey" : 1 } } -->> { "_id" : -6148914691236517204 } on : shard0001
-			{ "_id" : -6148914691236517204 } -->> { "_id" : -3074457345618258602 } on : shard0002
-			{ "_id" : -3074457345618258602 } -->> { "_id" : 0 } on : shard0001
-			{ "_id" : 0 } -->> { "_id" : 3074457345618258602 } on : shard0001
-			{ "_id" : 3074457345618258602 } -->> { "_id" : 6148914691236517204 } on : shard0002
-			{ "_id" : 6148914691236517204 } -->> { "_id" : { "$maxKey" : 1 } } on : shard0002
-			 tag: FLASH  { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } }
-		tagdb.bigidx
-			shard key: { "_id" : "hashed" }
-			chunks:
-				shard0000	3
-				shard0001	3
-			{ "_id" : { "$minKey" : 1 } } -->> { "_id" : -6148914691236517204 } on : shard0000
-			{ "_id" : -6148914691236517204 } -->> { "_id" : -3074457345618258602 } on : shard0000
-			{ "_id" : -3074457345618258602 } -->> { "_id" : 0 } on : shard0001
-			{ "_id" : 0 } -->> { "_id" : 3074457345618258602 } on : shard0001
-			{ "_id" : 3074457345618258602 } -->> { "_id" : 6148914691236517204 } on : shard0000
-			{ "_id" : 6148914691236517204 } -->> { "_id" : { "$maxKey" : 1 } } on : shard0001
-			 tag: HI_MEM  { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } }
+     {  "_id" : "admin",  "partitioned" : false,  "primary" : "config" }
+     {  "_id" : "tagdb",  "partitioned" : true,  "primary" : "shard0001" }
+         tagdb.bigdata
+             shard key: { "_id" : "hashed" }
+             chunks:
+                 shard0001    3
+                 shard0002    3
+             { "_id" : { "$minKey" : 1 } } -->> { "_id" : -6148914691236517204 } on : shard0001
+             { "_id" : -6148914691236517204 } -->> { "_id" : -3074457345618258602 } on : shard0002
+             { "_id" : -3074457345618258602 } -->> { "_id" : 0 } on : shard0001
+             { "_id" : 0 } -->> { "_id" : 3074457345618258602 } on : shard0001
+             { "_id" : 3074457345618258602 } -->> { "_id" : 6148914691236517204 } on : shard0002
+             { "_id" : 6148914691236517204 } -->> { "_id" : { "$maxKey" : 1 } } on : shard0002
+              tag: FLASH  { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } }
+         tagdb.bigidx
+             shard key: { "_id" : "hashed" }
+             chunks:
+                 shard0000    3
+                 shard0001    3
+             { "_id" : { "$minKey" : 1 } } -->> { "_id" : -6148914691236517204 } on : shard0000
+             { "_id" : -6148914691236517204 } -->> { "_id" : -3074457345618258602 } on : shard0000
+             { "_id" : -3074457345618258602 } -->> { "_id" : 0 } on : shard0001
+             { "_id" : 0 } -->> { "_id" : 3074457345618258602 } on : shard0001
+             { "_id" : 3074457345618258602 } -->> { "_id" : 6148914691236517204 } on : shard0000
+             { "_id" : 6148914691236517204 } -->> { "_id" : { "$maxKey" : 1 } } on : shard0001
+              tag: HI_MEM  { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } }
 {{< /highlight >}}
 
 ##### How you can use tags to make collection migrate from one shard to another
@@ -122,12 +122,12 @@ tagdb@mongos(2.6.0) > sh.shardCollection("tagdb.one",{_id:1})
 { "collectionsharded" : "tagdb.one", "ok" : 1 }
 tagdb@mongos(2.6.0) > sh.status()
    ...
- 		tagdb.one
-			shard key: { "_id" : 1 }
-			chunks:
-				shard0002	1
-			{ "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } } on : shard0002
-			 tag: shard2  { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } }
+      tagdb.one
+         shard key: { "_id" : 1 }
+         chunks:
+             shard0002    1
+         { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } } on : shard0002
+          tag: shard2  { "_id" : { "$minKey" : 1 } } -->> { "_id" : { "$maxKey" : 1 } }
 {{< /highlight >}}
 
 If we peek inside the config database, we should see our tags in the `config.tags` collection, our shard ranges attached to chunks in `config.chunks` and we can find evidence of the chunk moves due to tag policy in the `config.changelog` collection, as well as the `mongos` and `mongod` log files.
