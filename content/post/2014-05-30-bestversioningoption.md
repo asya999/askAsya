@@ -32,12 +32,18 @@ Here's a table that shows for each schema choice that we considered how well we 
 
              Schema         | Fetch 1       | Fetch Many    | Update       | Recover if fail 
 --------------------------- | ------------- | ------------- | ------------ | ---------------
-1) New doc for each         | Easy,Fast     | Not easy,Slow | Medium       | N/A 
-1a) New doc with "current"  | Easy,Fast     | Easy,Fast     | Medium       | Hard 
-2) Embedded in single doc   | Easy,Fastest  | Easy,Fastest  | Medium       | N/A 
-3) Sep Collection for prev. |  Easy,Fastest | Easy,Fastest  | Medium       |  Medium Hard 
-4) Deltas only in new doc   | Hard,Slow     | Hard,Slow     | Medium       | N/A 
-?) TBD                      |  Easy,Fastest | Easy,Fastest  | Easy,Fastest |  N/A 
+1  New doc for each         | Easy,Fast     | Not easy,Slow | Medium       | N/A 
+1a  New doc with "current"  | Easy,Fast     | Easy,Fast     | Medium       | Hard 
+2  Embedded in single doc   | Easy,Fastest  | Easy,Fastest  | Medium       | N/A 
+3  Sep Collection for prev. |  Easy,Fastest | Easy,Fastest  | Medium       |  Medium Hard 
+4  Deltas only in new doc   | Hard,Slow     | Hard,Slow     | Medium       | N/A 
+?  TBD                      |  Easy,Fastest | Easy,Fastest  | Easy,Fastest |  N/A 
+
+
+First Header   | Second Header
+  -------------  | -------------
+  *Content Cell* | Content Cell
+  Content Cell   | Content Cell
 
 "N/A" for recovery means there is no inconsistent state possible - if we only have to make one write to create/add a new version, we are safe from any inconsistency.  So "N/A" is the "easiest" value there.  
 
