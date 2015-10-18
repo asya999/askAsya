@@ -16,13 +16,7 @@ If you have a question you'd like me to answer, feel free to e-mail it to asya@m
 
 If you need help/support based on your specific configuration/instances, it's best to post to MongoDB User Google Group, or file a support ticket if you have access to MongoDB commercial support.
 
-## Other Resources
-
-* Built in [Go](http://golang.org/)
-* Loosely inspired by [Jekyll](http://jekyllrb.com/)
-* Primarily developed by [spf13](http://spf13.com/) on the train while commuting to and from Manhattan.
-
-# Credits
+## Credits
 
 This site is built with [Hugo](http://gohugo.io/)
-and coded in [Vim](http://vim.org).  Theme is based on Yeah, I'm old school...
+and coded in [Vim](http://vim.org).

@@ -1,6 +1,19 @@
 {{ partial "default_head.html" . }}
 
-{{ $pagination := 5 }}
+<div class="post">
+  <h1 class="post-title">{{ .Title }}</h1>
+  {{ if eq .Type "post"}}
+  <span class="post-date">{{ .Date.Format .Site.Params.DateForm }}
+  {{ partial "share.html" . }}
+  </span>
+  {{ end }}
+  {{ .Content }}
+  {{ if eq .Type "post"}}
+  {{ if .Site.Params.DisqusUser }}
+  {{ partial "disqus.html" . }}
+  {{ end }}
+  {{ end }}
+</div>
 
 <div class="posts">
   {{ range first $pagination .Data.Pages }}

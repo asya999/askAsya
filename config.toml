@@ -1,20 +1,27 @@
-title = "Ask Asya"
 author = "Asya Kamsky"
-canonifyurls = true
-paginate = 3
-theme = "ask-asya"
 baseurl = "http://asya999.github.io/"
+canonifyurls = true
 languageCode = "en-us"
 MetaDataFormat = "toml"
+theme = "ask-asya"
+title = "Ask Asya"
 
 [permalinks]
 	page = "/:title/"
 	about = "/:filename/"
 
 [Params]
+	author = "Asya Kamsky"
+	Title = "Ask Asya"
+        tagline = "Answering your burning questions about MongoDB since 2012"
+        domain = "askasya.com"
+        RecentLimit = 5
+        DisqusUser = "askasya"
 	github = "http://github.com/asya999/bits-n-pieces"
 	GitHubUser = "asya999"
 	DateForm = "Mon, Jan  2, 2006"
+	paginate = 3
+        Twitter = "@asya999"
 	[GitHub]
             "Url" = "http://github.com/asya999/bits-n-pieces"
             "Head" = "master"
