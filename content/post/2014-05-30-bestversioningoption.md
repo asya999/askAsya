@@ -30,14 +30,14 @@ We looked at the trade-offs and decided that the important factors were our abil
 
 Here's a table that shows for each schema choice that we considered how well we can handle the reads, writes and if an update has to make more than one write, how easy it is to recover or to be in a relatively "safe" state:
 
-             Schema         | Fetch 1       | Fetch Many  | | Update        | Recover if fail 
-----------------------------|---------------|-------------|-|---------------|-----------------
-1) New doc for each         | Easy,Fast     | Not easy,Slow | | Medium | N/A 
-1a) New doc with "current"  | Easy,Fast     | Easy,Fast | | Medium | Hard 
-2) Embedded in single doc   | Easy,Fastest  | Easy,Fastest | | Medium | N/A 
-3) Sep Collection for prev. |  Easy,Fastest | Easy,Fastest  | | Medium |  Medium Hard 
-4) Deltas only in new doc   | Hard,Slow     | Hard,Slow | | Medium | N/A 
-?) TBD                      |  Easy,Fastest | Easy,Fastest  | | Easy,Fastest |  N/A 
+             Schema         | Fetch 1       | Fetch Many    | Update       | Recover if fail 
+----------------------------|---------------|-------------  |--------------|----------------
+1) New doc for each         | Easy,Fast     | Not easy,Slow | Medium       | N/A 
+1a) New doc with "current"  | Easy,Fast     | Easy,Fast     | Medium       | Hard 
+2) Embedded in single doc   | Easy,Fastest  | Easy,Fastest  | Medium       | N/A 
+3) Sep Collection for prev. |  Easy,Fastest | Easy,Fastest  | Medium       |  Medium Hard 
+4) Deltas only in new doc   | Hard,Slow     | Hard,Slow     | Medium       | N/A 
+?) TBD                      |  Easy,Fastest | Easy,Fastest  | Easy,Fastest |  N/A 
 
 "N/A" for recovery means there is no inconsistent state possible - if we only have to make one write to create/add a new version, we are safe from any inconsistency.  So "N/A" is the "easiest" value there.  
 
