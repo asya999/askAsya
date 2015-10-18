@@ -65,7 +65,7 @@ Imagine you worked very hard to optimize your queries so that indexes are always
 
 To keep "atypical" jobs from interfering with your "typical" work load, configure the atypical ones to use read preference Secondary. Note that Secondary is different from SecondaryPreferred as the latter will go to the Primary if there is no available Secondary but the former will return an error if there is no Secondary to read from.  Since these jobs are usually not urgent, you’d rather have them wait and retry later than interfere with operational responsiveness of your app anyway.  You can even use ["tags"] [1] to isolate different jobs to specific nodes even further.  
 
-#####Bottom line#####
+##### Bottom line #####
 
 Make your primary do the work that the application relies on every second.  Make sure that _at least_ one secondary is idle and ready to take over for the primary in case of failure.  Use additional secondaries (_not_ the hot standby one!) for all other needs whether it’s backups, analytical reports, ad hoc queries, ETL, etc.  This way, you know that you can handle the application requirements after a failover just as well as before.
 
