@@ -4,7 +4,7 @@ description: "about this site"
 date: "2014-04-09"
 ---
 
-<a href="/" title="Home"> <img src=http://www.askasya.com/assets/askAsyaLeaf.png height="128" width="415" alt={{ .Site.Params.Title }} ></a>
+<a href="/" title="Home"> <img src=http://www.askasya.com/assets/askAsyaLeaf.png height="178" width="415" alt={{ .Site.Params.Title }} ></a>
 
 I'm Asya Kamsky and I work [with](http://www.mongodb.org) and at [MongoDB](http://www.mongodb.com).
 
