@@ -1,10 +1,8 @@
 author = "Asya Kamsky"
 baseurl = "http://asya999.github.io/"
-canonifyurls = true
 languageCode = "en-us"
-MetaDataFormat = "toml"
-theme = "ask-asya"
 title = "Ask Asya"
+canonifyurls = true
 
 [permalinks]
 	page = "/:title/"

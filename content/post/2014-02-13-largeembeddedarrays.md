@@ -1,3 +1,14 @@
+---
+tags:
+  - "schema"
+  - "arrays"
+  - "performance"
+date: "2014-02-13"
+title: "Why shouldn't I embed large arrays in my documents?"
+description: "The dangers of embedding too much into arrays in documents"
+slug: "largeembeddedarrays"
+---
+
 +++
 Categories = ["MongoDB"]
 Title= "Why shouldn't I embed large arrays in my documents?"

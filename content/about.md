@@ -1,9 +1,8 @@
-+++
-title = "About"
-date = "2014-04-09"
-description = "about this site"
-sidebar = true
-+++
+---
+title: "About"
+description: "about this site"
+date: "2014-04-09"
+---
 
 ## About Me
 

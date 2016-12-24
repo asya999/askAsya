@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Asya Kamky"> 
+
+
+    <title>Schema Design - Blog Posts and Comments revisited - http://asya999.github.io/</title>
+    <link rel="canonical" href="http://asya999.github.io/post/blogsandcommentsrevisted/">
+    
+    <link href="http://asya999.github.io/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://asya999.github.io/css/font-awesome.css" rel="stylesheet">
+    <link href="http://asya999.github.io/css/custom.css" rel="stylesheet">
+
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://asya999.github.io/">Ask Asya</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="http://asya999.github.io/post/">Post Index</a></li>
+                    <li><a href="http://asya999.github.io/about/">About Me</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="well well-sm">
+                    <h3>Schema Design - Blog Posts and Comments revisited<br> <small></small></h3>
+                    <hr>
+                    
+
+<h3 id="question:7db8f99d4cb4bf37c187790fa7b90df5">Question:</h3>
+
+<p>I have a question about whether I should store comments inside the blog post entry or in a separate collection. It&rsquo;d be nice to see examples of how to access various fields in both cases, how to index and in general how to know when to embed and when to link.</p>
+
+<h3 id="answer:7db8f99d4cb4bf37c187790fa7b90df5">Answer:</h3>
+
+<h4 id="the-blog-schema:7db8f99d4cb4bf37c187790fa7b90df5">The Blog Schema</h4>
+
+<p>There has been a lot of discussion and write-ups about how to model a simple blog that allows comments on posts - it&rsquo;s a fairly simple example that everyone can understand, and at the same time it offers several opportunities to choose different ways to structure the schema.  The example usually consists of four concepts: users(or authors), posts, tags on posts and comments on posts.</p>
+
+<h5 id="authors:7db8f99d4cb4bf37c187790fa7b90df5">Authors</h5>
+
+<p>Typically everyone agrees that the authors or users are stored in a  collection of their own where you keep their information - everything from their username, password, when they last logged in, when they signed up for the service, etc.</p>
+
+<h5 id="posts:7db8f99d4cb4bf37c187790fa7b90df5">Posts</h5>
+
+<p>There is also little argument that posts should be stored separately from authors - I don&rsquo;t think I&rsquo;ve ever heard anyone advocate for embedding posts within author document - that makes no sense for many reason, not the least of them are the fact that you want to avoid unbounded growth of the author document, and querying over posts is a natural function of the use case so posts really should be first class object.</p>
+
+<p>What isn&rsquo;t always agreed on is whether the author of the post should have just their unique primary key (or username) saved in each post or whether some of the information, like their full name, should also be denormalized into each post.</p>
+
+<h5 id="tags:7db8f99d4cb4bf37c187790fa7b90df5">Tags</h5>
+
+<p>Tags being simple strings should be stored inside the post document.  The it advantage of document model over relational is that it allows you to embed an array with multiple values without sacrificing the ability to index the tags:</p>
+
+<pre><code>{ &quot;_id&quot; : &lt;Id&gt;,
+    &quot;author&quot; :  { &quot;id&quot; :  &lt;authorId&gt;, &quot;name&quot; :  &quot;Asya Kamsky&quot; },
+    &quot;tags&quot; :  [ &quot;schema&quot;, &quot;embed&quot;, &quot;link&quot; ],
+    ...
+}
+</code></pre>
+
+<p>We can index tags with <code>db.posts.ensureIndex( { tags:1 } )</code> which will be used in queries like
+    db.posts.find( { &ldquo;tags&rdquo; : { &ldquo;$in&rdquo;:  [&ldquo;schema&rdquo;, &ldquo;performance&rdquo;] } } )</p>
+
+<p>You probably noticed that I happen to think it&rsquo;s right to denormalize the author&rsquo;s name into the post - I&rsquo;m a strong believer in optimizing for the common case, not exceptional one<sup class="footnote-ref" id="fnref:7db8f99d4cb4bf37c187790fa7b90df5:fn-f1"><a rel="footnote" href="#fn:7db8f99d4cb4bf37c187790fa7b90df5:fn-f1">1</a></sup> and I think optimizing query performance is more important than trying to minimize storage at the cost of performance.</p>
+
+<h5 id="comments:7db8f99d4cb4bf37c187790fa7b90df5">Comments</h5>
+
+<p>Comment documents, or rather where to store them, usually generates the most discussion and disagreement.</p>
+
+<p>Let&rsquo;s consider both options and see what we can gain from each:</p>
+
+<h6 id="embed-comments:7db8f99d4cb4bf37c187790fa7b90df5">embed comments</h6>
+
+<pre><code>{
+     _id: &lt;Id&gt;,
+     author: { id: &lt;authorId&gt;, name: &quot;Asya Kamsky&quot; },
+     tags: [ &quot;schema&quot;, &quot;embed&quot;, &quot;link&quot; ],
+     comments: [
+         { author : { id:&lt;authorId&gt;,name:&quot;Joe Shmoe&quot;}, 
+           date:ISODate(&quot; &quot;), 
+           text:&quot;Blah Blah Blah&quot; },
+         { author : { id:&lt;authorId&gt;,name:&quot;Jane Doe&quot;}, 
+           date:ISODate(&quot; &quot;), 
+           text:&quot;Blah Blah Blah&quot; },
+         { author : { id:&lt;authorId&gt;,name:&quot;Asya Kamsky&quot;}, 
+           date:ISODate(&quot; &quot;), 
+           text:&quot;Blah Blah Blah&quot; },
+         ...
+     ]
+}
+</code></pre>
+
+<p>In addition to other indexes we already plan to have on posts, we will probably need to add several indexes to support querying for comments or by comments.  For example, when someone logs in, I can see wanting to show them all the threads/posts that they commented on, which means we need to index on &ldquo;comments.author.id&rdquo; so that we can query for posts that this author commented on.  We also might need to include fields inside the comments array to track which comments are responses to which other comments, and the biggest downside of them all, if the discussion in comments gets really heated, we will end up with a huge array inside this post.</p>
+
+<h6 id="have-separate-comments-collection:7db8f99d4cb4bf37c187790fa7b90df5">have separate comments collection</h6>
+
+<pre><code>{  post : &lt;postId&gt;,
+    author : { id:&lt;authorId&gt;,name:&quot;Joe Shmoe&quot;}, 
+    date:ISODate(&quot; &quot;), 
+    text:&quot;Blah Blah Blah&quot; 
+}
+</code></pre>
+
+<p>A collection of comments would have to have an index on the postId so that we can look up the comments for a particular post, probably compound index with date so that we can query for the most recent posts.  We would want to index author.id and date as well.  But the nice thing is that here we can control how many comments we want returned, and even though querying for all comments for a post might involve some random IO, we can minimize it by only querying for as many comments as we intend to display.  The fact is that most of the time the reader of the blog post won&rsquo;t even look at the comments, and if they do then they might read a few and never click on &ldquo;show more&rdquo; which we would normally have.</p>
+
+<p>Is there a third option?</p>
+
+<h6 id="hybrid-option:7db8f99d4cb4bf37c187790fa7b90df5">hybrid option</h6>
+
+<p>The nice thing about flexible schema is that in cases like these you can keep comments in separate collection but also choose to denormalize some small number of comments into the post itself, either first few or the last few or whatever fits your requirements best.</p>
+
+<p>This hybrid approach may be analogous to the product collection for an e-commerce site where they store reviews of products separately from the product itself, but keep the highest voted reviews  (one positive and one negative) embedded in the product. This is a good schema because when you display the product, you want to display a few most helpful reviews, but you don&rsquo;t need to display all the reviews at that time.</p>
+
+<h4 id="summary:7db8f99d4cb4bf37c187790fa7b90df5">Summary</h4>
+
+<p>The general principal to use when trying to decide between embedding and linking is this:
+- consider which objects are first class entities and which are properties of such entities
+- consider what your use case requires to display fast and what allows for additional queries
+- when two choices both seem to be viable, prototype both and see which works better</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:7db8f99d4cb4bf37c187790fa7b90df5:fn-f1">Someone always brings up the possibility that the author will change their name, as if that&rsquo;s an everyday occurrence
+ <a class="footnote-return" href="#fnref:7db8f99d4cb4bf37c187790fa7b90df5:fn-f1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+                               <hr>
+           <h2>Comments</h2>
+           <div id="disqus_thread"></div>
+           <script type="text/javascript">
+               (function() {
+                   var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+			  dsq.src = '//askasya.disqus.com/embed.js';
+                          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+           </script>
+
+            </div>
+        </div>
+
+        
+        <div class="col-md-3">
+            <div class="well well-sm"> 
+                <h4>March 29, 2014<br>
+                <small>991 words</small></h4>
+                <hr>
+                <strong>Categories</strong>
+                <ul class="list-unstyled">
+                
+                    <li><a href="http://asya999.github.io/categories/mongodb">MongoDB</a></li>
+                
+                </ul>
+                <hr>
+                <strong>Tags</strong><br>
+                <a class="label label-default" href="http://asya999.github.io/tags/schema">schema</a> <a class="label label-default" href="http://asya999.github.io/tags/modeling">modeling</a> <a class="label label-default" href="http://asya999.github.io/tags/embed">embed</a> <a class="label label-default" href="http://asya999.github.io/tags/arrays">arrays</a> 
+            </div>
+                <div class="panel panel-default">
+        <div class="panel-heading" style="padding: 2px 15px;">
+            <h4>Connect. Socialize.</h4>
+        </div>
+        <div class="panel-body">
+            <a href="https://github.com/asya999/" class="btn btn-primary btn-xs"><i class="fa fa-github-square fa-2x"></i></a>
+            <a href="https://www.facebook.com/mongodb" class="btn btn-info btn-xs"><i class="fa fa-facebook-square fa-2x"></i></a>
+            <a href="https://www.twitter.com/asya999" class="btn btn-info btn-xs"><i class="fa fa-twitter-square fa-2x"></i></a>
+
+            <div class="alert alert-info alert-dismissable" style="margin-top:25px;margin-bottom:5px;">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>Hey, listen!</strong><br>
+                AK: You should modify the <code>layouts/partials/menu.html</code> template and include the rest of my own links.
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </div>
+        <footer>
+            <div class="row">
+                <hr>
+                <div class="col-sm-12">
+                    <p>&copy; Asya Kamsky 2016 &middot;
+                    Built with <a href="https://github.com/spf13/hugo">Hugo</a></p>
+                </div>
+            </div>
+        </footer>
+
+</div>
+
+    <script src="http://asya999.github.io/js/jquery-1.11.3.min.js"></script>
+    <script src="http://asya999.github.io/js/bootstrap.js"></script>
+</body>
+</html>
+
