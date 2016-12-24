@@ -1,9 +1,10 @@
 +++
 Categories = ["MongoDB"]
-Title= "How do I match documents where all array elements match some predicate?"
+Title= "How to match documents where all array elements match predicate."
+Description= "How do I match all documents where all array elements match some predicate?"
 Date= "2016-10-09"
 Slug= "matchallarrayelements"
-Tags= ["schema","query","arrays","mongodb"]
+Tags= ["schema","query","arrays"]
 +++
 
 ### Question:
@@ -152,7 +153,4 @@ db.coll.find({"b.x":{$in:[1,2,3]}})
 { "b" : [ { "x" : 3 }, { "x" : 6 }, { "x" : 1 } ] }
 { "b" : [ { "x" : 1 }, { "x" : 2 }, { "x" : 3 } ] }
 { "b" : [ { "x" : 1 }, { "x" : 2 }, { "x" : 3 }, { "x" : 4 } ] }
-// another way of structuring this query is with $or
-db.coll.find({$or:[{"b.x":1},{"b.x":2},{"b.x":3}]})
-db.coll.find({$and:[{"b.x":1},{"b.x":2},{"b.x":3}]})
-
+````
