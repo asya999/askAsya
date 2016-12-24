@@ -144,6 +144,7 @@ Now, let's try it on a more complex document structure with a more complex predi
 { "b" : [ { "x" : 1, "y" : ISODate("2016-04-09T00:00:00Z") }, { "x" : 2, "y" : ISODate("2016-04-19T00:00:00Z") }, { "x" : 3, "y" : ISODate("2016-09-21T00:00:00Z") } ] }
 { "b" : [ { "x" : 1, "y" : ISODate("2016-04-09T00:00:00Z") }, { "x" : 2, "y" : ISODate("2016-04-19T00:00:00Z") }, { "x" : 3, "y" : ISODate("2016-01-01T00:00:00Z") }, { "x" : 4, "y" : ISODate("2016-01-01T00:00:00Z") } ] }
 ````
+
 If our predicate was just about "b.x" or just about "b.y" we would use "$elemMatch" rather than dotted notation to run a query just like our first example.  To find all documents where "b.x" is either 1, 2 or 3, we can go through these steps (assume all queries ask in projection just for the field I'm querying by):
 ````
 // find all documents where "b.x" is one of 1,2,3
