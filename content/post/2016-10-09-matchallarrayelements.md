@@ -138,20 +138,28 @@ db.coll.find({"$nor":[{"a":{"$elemMatch":{$not:/^str/}}}]})
 
 Now, let's try it on a more complex document structure with a more complex predicate.
 ````
-{ "b" : [ { "x" : 1, "y" : ISODate("2016-04-09T00:00:00Z") }, { "x" : 2, "y" : ISODate("2016-04-19T00:00:00Z") }, { "x" : 3, "y" : ISODate("2015-12-12T00:00:00Z") } ] }
-{ "b" : [ { "x" : 1, "y" : ISODate("2016-02-05T12:00:00Z") }, { "x" : 9, "y" : ISODate("2016-03-01T00:00:00Z") }, { "x" : 5, "y" : ISODate("2015-11-01T00:00:00Z") } ] }
-{ "b" : [ { "x" : 3, "y" : ISODate("2016-01-31T12:00:00Z") }, { "x" : 6, "y" : ISODate("2016-03-01T00:00:00Z") }, { "x" : 1, "y" : ISODate("2016-10-01T00:00:00Z") } ] }
-{ "b" : [ { "x" : 1, "y" : ISODate("2016-04-09T00:00:00Z") }, { "x" : 2, "y" : ISODate("2016-04-19T00:00:00Z") }, { "x" : 3, "y" : ISODate("2016-09-21T00:00:00Z") } ] }
-{ "b" : [ { "x" : 1, "y" : ISODate("2016-04-09T00:00:00Z") }, { "x" : 2, "y" : ISODate("2016-04-19T00:00:00Z") }, { "x" : 3, "y" : ISODate("2016-01-01T00:00:00Z") }, { "x" : 4, "y" : ISODate("2016-01-01T00:00:00Z") } ] }
+{ "b" : [ { "x" : 1, "y" : ISODate("2016-04-09T00:00:00Z") }, 
+          { "x" : 2, "y" : ISODate("2016-04-19T00:00:00Z") }, 
+          { "x" : 3, "y" : ISODate("2015-12-12T00:00:00Z") } ] }
+{ "b" : [ { "x" : 1, "y" : ISODate("2016-02-05T12:00:00Z") }, 
+          { "x" : 9, "y" : ISODate("2016-03-01T00:00:00Z") }, 
+          { "x" : 5, "y" : ISODate("2015-11-01T00:00:00Z") } ] }
+{ "b" : [ { "x" : 3, "y" : ISODate("2016-01-31T12:00:00Z") }, 
+          { "x" : 6, "y" : ISODate("2016-03-01T00:00:00Z") }, 
+          { "x" : 1, "y" : ISODate("2016-10-01T00:00:00Z") } ] }
+{ "b" : [ { "x" : 1, "y" : ISODate("2016-04-09T00:00:00Z") }, 
+          { "x" : 2, "y" : ISODate("2016-04-19T00:00:00Z") }, 
+          { "x" : 3, "y" : ISODate("2016-09-21T00:00:00Z") } ] }
+{ "b" : [ { "x" : 1, "y" : ISODate("2016-04-09T00:00:00Z") }, 
+          { "x" : 2, "y" : ISODate("2016-04-19T00:00:00Z") }, 
+          { "x" : 3, "y" : ISODate("2016-01-01T00:00:00Z") }, 
+          { "x" : 4, "y" : ISODate("2016-01-01T00:00:00Z") } ] }
 ````
 
 If our predicate was just about "b.x" or just about "b.y" we would use "$elemMatch" rather than dotted notation to run a query just like our first example.  To find all documents where "b.x" is either 1, 2 or 3, we can go through these steps (assume all queries ask in projection just for the field I'm querying by):
 ````
 // find all documents where "b.x" is one of 1,2,3
-db.coll.find({"b.x":{$in:[1,2,3]}})
+db.coll.find({$nor:[{"b":{$elemMatch:{"x":{$nin:[1,2,3]}}}}]},{_id:0,"b.x":1})
 { "b" : [ { "x" : 1 }, { "x" : 2 }, { "x" : 3 } ] }
-{ "b" : [ { "x" : 1 }, { "x" : 9 }, { "x" : 5 } ] }
-{ "b" : [ { "x" : 3 }, { "x" : 6 }, { "x" : 1 } ] }
 { "b" : [ { "x" : 1 }, { "x" : 2 }, { "x" : 3 } ] }
-{ "b" : [ { "x" : 1 }, { "x" : 2 }, { "x" : 3 }, { "x" : 4 } ] }
 ````
