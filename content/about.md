@@ -9,7 +9,7 @@ date: "2014-04-09"
 I'm Asya Kamsky and I work [with](http://www.mongodb.org) and at [MongoDB](http://www.mongodb.com).
 
 I've got many sites on the web that I contribute to, this is one where I'm
-publishing many questions and answers about MongoDB that come up on mailing lists, [Google Groups], [Stackoverflow], and [live discussions].  
+publishing many questions and answers about MongoDB that come up on mailing lists, [Google Groups](https://groups.google.com/forum/#!forum/mongodb-user), [Stackoverflow](http://stackoverflow.com/questions/tagged/mongodb), and [live discussions](https://www.mongodb.com/world17).  
 
 If you have a question you'd like me to answer, feel free to e-mail it to asya@mongodb.com and I will add it to the list.  I will tend to answer questions that others are also curious about, and I usually try not to duplicate the information that's already in the MongoDB docs.
 
