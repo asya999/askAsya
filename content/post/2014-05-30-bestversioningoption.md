@@ -238,6 +238,7 @@ while (cursor.hasNext()) {
     prevTS=doc.ts; /* save in case we need to refetch from the oplog */
 }
 </pre>
+
 Of course this code does minimal error checking and it's not set up to automatically restart if it loses connection to the primary, or the primary changes in the replica set.  This is because here we are reading from a local oplog when in real life you may be fetching data from another server or cluster entirely.  Even so, about 15 lines of code there are for error checking and information printing, so the actual "work" we do is quite simple.  
 
 ##### Creating a full archive from tailing the oplog #####
@@ -282,7 +283,9 @@ var cursor=db.getSiblingDB("local").getCollection("oplog.rs"
        ).addOption(DBQuery.Option.tailable
        ).addOption(DBQuery.Option.noTimeout);
 </pre>
+
 The worker loop (slightly adjusted):
+
 <pre class="prettyprint lang-java">
 while (cursor.hasNext()) {
     var doc=cursor.next();
@@ -363,6 +366,7 @@ db.getSiblingDB("local").getCollection("oplog.rs").find( {
 { "o" : { "$set" : { "version" : 8, "attrCounter" : 1, "a" : 1 } } }
 { "o" : { "$set" : { "version" : 9 }, "$unset" : { "a" : true, "attrCounter" : true } } }
 </pre>
+
 The archive collection contents (slightly formatted for readability):
 <pre class="prettyprint lang-js">
 db.docs_full_archive.find( {"docId":279}, {"_id":0} )
