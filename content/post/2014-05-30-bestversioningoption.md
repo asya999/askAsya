@@ -310,11 +310,12 @@ while (cursor.hasNext()) {
             for (i in doc.o["$set"]) {
                 newDoc[i]=doc.o["$set"][i];
             }
-        } else if (doc.o.hasOwnProperty("$unset")) { 
+        } 
+        if (doc.o.hasOwnProperty("$unset")) { 
             for (i in doc.o["$unset"]) {
                 delete(newDoc[i]);
             }
-        } else throw "Can only handle update with '_id', '$set' or '$unset' ";
+        }
     } else if (doc.op != "c") throw "Unexpected op! " + tojson(doc);
 
     var  result = db.getCollection(coll).insert(newDoc);
