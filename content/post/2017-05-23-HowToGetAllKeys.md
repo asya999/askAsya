@@ -12,14 +12,14 @@ I heard there are new operators in aggregation to extract keys from my documents
 
 ### Answer:
 
-There are new expressions available as of [3.4.4][1] - `$objectToArray`, `$arrayToObject` and in 3.5.5 we also get [$mergeObjects][3].
+There are new expressions available as of [3.4.4][1] - `$objectToArray`, `$arrayToObject` and in 3.5.5 we also get [`$mergeObjects`][3].
 
 [1]: https://docs.mongodb.com/manual/release-notes/3.4/#apr-21-2017
 [3]: https://jira.mongodb.org/browse/SERVER-24879
 
-##### split top level object into array of key value pairs
+#### Split top level object into array of key value pairs ####
 
-`{"$objectToArray":"$$ROOT"}` will return an array of `{k:"keyname", v:<value>}` elements.
+`{"$objectToArray":"$$ROOT"}` will return an array of `{"k":"keyname", "v":<value>}` elements.
 
 ```
 db.example.findOne()
@@ -32,7 +32,7 @@ db.example.findOne()
     "foo" : 1
   }
 }
-db.claims.aggregate({$limit:1},{$project:{o:{$objectToArray:"$$ROOT"}}}).pretty()
+db.claims.aggregate({"$limit":1},{"$project":{"o":{"$objectToArray":"$$ROOT"}}}).pretty()
 {
   "_id" : ObjectId("5924aca1530259006a3792ca"),
   "o" : [
@@ -62,20 +62,21 @@ db.claims.aggregate({$limit:1},{$project:{o:{$objectToArray:"$$ROOT"}}}).pretty(
 }
 ```
 
-##### Now what can I do?
+#### Now what do I do? ####
 
 ```
 db.claims.aggregate([
-  {$project:{o:{$objectToArray:"$$ROOT"}}},
-  {$unwind:"$o"},
-  {$group:{_id:null, keys:{$addToSet:"$o.k"}}}
+  {"$project":{"o":{"$objectToArray":"$$ROOT"}}},
+  {"$unwind":"$o"},
+  {"$group":{"_id":null, "keys":{"$addToSet":"$o.k"}}}
 ])
 ```
-##### Are there more efficient ways to do this?
+
+#### Are there more efficient ways to do this?  ####
 
 There are other ways to do this, but none of them can escape doing a `$group` stage over all the documents (i.e. with `_id` as a constant, usually null).  But we could avoid `$unwind` stage a couple of different ways.
 
-###### using arrays ######
+#####   Using arrays #####
 
 If your documents are more or less uniform, or if the collection isn't too big, you can do this:
 ```
@@ -85,7 +86,7 @@ db.claims.aggregate([
 ])
 ```
 
-###### using $mergeObjects ######
+#####   Using `$mergeObjects` #####
 
 3.5 added a new aggregation expression to merge two or more JSON objects, and it's an expression that can be used as an accumulator during `$group` stage.
 
