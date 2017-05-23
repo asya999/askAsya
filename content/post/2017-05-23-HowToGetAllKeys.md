@@ -81,8 +81,19 @@ There are other ways to do this, but none of them can escape doing a `$group` st
 If your documents are more or less uniform, or if the collection isn't too big, you can do this:
 ```
 db.claims.aggregate([
-  { "$group": { "_id": null, "keys": { "$addToSet": { "$map": { "input": { "$objectToArray": "$$ROOT" }, "in": "$$this.k" } } } } }, 
-  { "$project": { "keys": { "$reduce": { "input": "$keys", "initialValue": [], "in": { "$setUnion": [ "$$this", "$$value" ] } } } } }
+  { "$group": { 
+      "_id": null, 
+      "keys": { "$addToSet": { 
+         "$map": { "input": { "$objectToArray": "$$ROOT" }, "in": "$$this.k" } 
+      } } 
+  } }, 
+  { "$project": { 
+      "keys": { "$reduce": { 
+          "input": "$keys", 
+          "initialValue": [], 
+          "in": { "$setUnion": [ "$$this", "$$value" ] } 
+       } } 
+  } }
 ])
 ```
 
