@@ -22,7 +22,7 @@ There are new expressions available as of [3.4.4][1] - `$objectToArray`, `$array
 `{"$objectToArray":"$$ROOT"}` will return an array of `{"k":"keyname", "v":<value>}` elements.
 
 ```
-db.example.findOne()
+db.claims.findOne()
 {
   "_id" : ObjectId("5924aca1530259006a3792ca"),
   "member_id" : "m1",
@@ -70,6 +70,7 @@ db.claims.aggregate([
   {"$unwind":"$o"},
   {"$group":{"_id":null, "keys":{"$addToSet":"$o.k"}}}
 ])
+{ "_id" : null, "keys" : [ "claim_id", "details", "last_updated", "member_id", "_id" ] }
 ```
 
 #### Are there more efficient ways to do this?  ####
@@ -95,13 +96,16 @@ db.claims.aggregate([
        } } 
   } }
 ])
+{ "_id" : null, "keys" : [ "_id", "claim_id", "details", "last_updated", "member_id" ] }
 ```
+
+Note that this could fail for very large number of documents because the group accumulates array of arrays of keys.  However, because it uses $addToSet, if your documents are uniform, it won't grow very big (it will have an array element for every different set of keys across all your documents).
 
 #####   Using `$mergeObjects` #####
 
 3.5 added a new aggregation expression to merge two or more JSON objects, and it's an expression that can be used as an accumulator during `$group` stage.
 
-Basic example: `{"$mergeObjects":[ { "a": 1, "b": "foo"}, { "a": 99, "c": "bar"} ]}` results in `{ "a": 99, "b": "foo", "c": "bar" }`.  When a field exists in more than one object being merged, the last one (going from left to right) "wins".  
+Basic example: `{"$mergeObjects":[ { "a": 1, "b": "foo"}, { "a": 99, "c": "bar"} ]}` results in `{ "a": 99, "b": "foo", "c": "bar" }`.  When a field exists in more than one object being merged, the last one (going from left to right) "wins".  We don't care about order, since we are going to throw away the values anyway.
 
 More fancy example for schema key analysis:
 ```
@@ -109,12 +113,14 @@ db.claims.aggregate([
   {"$group":{"_id":null, "keys":{"$mergeObjects":"$$ROOT"}}},
   {"$project":{"keys": { "$map": { "input": { "$objectToArray": "$keys" }, "in": "$$this.k" } } } }
 ])
+{ "_id" : null, "keys" : [ "_id", "member_id", "claim_id", "last_updated", "details" ] }
 ```
 
-All the above aggregations return the same result:
+All the above aggregations return the same result set:
 ```
-{ "_id" : null, "keys" : [ "details", "_id", "member_id", "last_updated", "claim_id" ] }
+{ "_id" : null, "keys" : [ "_id", "member_id", "claim_id", "last_updated", "details" ] }
 ```
-Though "keys" being a set, the order of fields in the array is not guaranteed to be the same.
+
+Because "keys" is a set, the order of them in the array is not guaranteed to be the same.
 
 Next time I'll show you how you can do more sophisticated schema analysis with aggregation, handling embedded object (i.e. subdocuments) as well as tracking types of values for each key.
