@@ -10,7 +10,7 @@ Tags= ["schema","modeling","indexes","versioning"]
 Consider requirement that we have to be able to recreate/query any version of a document that ever existed in a particular collection.   So we start out with:
 
     {   docId: "A",
-        version: 1,
+        v: 1,
         color: "red",
         locale: "USA"
     }
@@ -18,7 +18,7 @@ Consider requirement that we have to be able to recreate/query any version of a 
 If we need to set color to "blue", instead of updating the "color" field from "red" to "blue", we have to create a new version of the document which now has its full "current" state, and preserve somehow the old version of the document.   So we insert
 
     {   docId: "A",
-        version: 2,
+        v: 2,
         color: "blue",
         locale: "USA"
     }
@@ -90,8 +90,8 @@ Note that applying your filter *before* you filter out all but the latest versio
 
 Instead we have to do this:
 
-    sort={"$sort": { "documentId" : 1, "version" : -1 } };
-    group={"$group" : { "_id" : "$documentId",
+    sort={"$sort": { "docId" : 1, "v" : -1 } };
+    group={"$group" : { "_id" : "$docId",
                         "doc": { "$first" : "$$ROOT" }
                        } };
     match={"$match":{"doc.attrN":<value>}}; /* RIGHT */
@@ -109,7 +109,7 @@ If the insert succeeds, it's done, but if it gets a unique constraint violation,
 Failure does _not_ create an inconsistent state, since there is only a single write.
    
 ##### Choice 1a
-In a variant of 1. we might add a field in the "current" version of each documentId
+In a variant of 1. we might add a field in the "current" version of each docId
  
          {  "docId" : 174, "v" : 1,  "attr1": 165 }
          {  "docId" : 174, "v" : 2,  "attr1": 165, "attr2": "A-1" }
@@ -175,7 +175,7 @@ Store current document in your "primary" collection, and keep older versions in 
                   {  "docId" : 174, "v" : 1,  "attr1": 165 }
                   {  "docId" : 174, "v" : 2,  "attr1": 165, "attr2": "A-1" }
            
-    For each documentId, there is only one document which represented its current state.
+    For each docId, there is only one document which represented its current state.
 ###### To return only current document
 This one is the simplest of them all.  Since the old versions are in another collection, you just query normally when you need to find a single or multiple documents - they will all be the current version.
 ###### To generate new version and update
@@ -185,16 +185,16 @@ The problem is that you may fail before that last write and now you'll be missin
 
 What if we  switch the order of writes to save into the previous collection first?   We read the current document, we write it to previous collection, we now change it to be "new" current and save it into "current" collection.  This has several advantages:
 - if someone else is trying to update this document, they will also be saving into "previous" collection, so having a unique index on docId, version will tell us if we lost the race and now have to try again.  
-- if the thread dies in the middle (after insert into previous and before updating current) it's not the end of the world, as your current collection was not affected, but you do need a way to "clean up" your "previous" collection, first because you need to remove the version of the document that never existed in "current" and second because it will block all other "updates" on this document by using an invalid "docId", "version".
+- if the thread dies in the middle (after insert into previous and before updating current) it's not the end of the world, as your current collection was not affected, but you do need a way to "clean up" your "previous" collection, first because you need to remove the version of the document that never existed in "current" and second because it will block all other "updates" on this document by using an invalid "docId", "v".
 
 Luckily, clean-up may be simple, as any time we detect that there exists a docId, version in "current" that also exists in "previous" it means either there is an update "in progress" or it means that an update "died" and we should clean up.  Of course the devil is in the details - and it could cause delays in the system since you have to wait long enough to be sure that this "in progress" update actually died.  Or you can have another field that you update after successful writes in both places (now making it easier to recover, but needing to do three writes before you're done with a single document update!)  Let's call this Medium Hard still. 
       
 ##### Choice 4
 Store only "deltas" with increasing versions
 
-        {  "documentId" : 174, "v" : 1,  "attr1": 165 }
-        {  "documentId" : 174, "v" : 2,  "attr2": "A-1" }
-        {  "documentId" : 174, "v" : 3,  "attr1": 184 }
+        {  "docId" : 174, "v" : 1,  "attr1": 165 }
+        {  "docId" : 174, "v" : 2,  "attr2": "A-1" }
+        {  "docId" : 174, "v" : 3,  "attr1": 184 }
 
 For each docId, the current state must be derived by "merging" all the documents with matching docId, keeping the "latest" or "highest" version's value of each attribute if it occurs in more than one version.
   
